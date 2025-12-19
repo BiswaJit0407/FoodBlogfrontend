@@ -14,9 +14,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   const navItems = [
     { icon: ChefHat, label: "All Recipes", path: "/", active: location.pathname === "/" && !location.search },
-    { icon: Heart, label: "Favorites", path: "/favorites", active: location.pathname === "/favorites" },
-    { icon: BookOpen, label: "Courses", path: "/courses", active: location.pathname === "/courses" },
-    { icon: Users, label: "Community", path: "/community", active: location.pathname === "/community" },
+    // { icon: Heart, label: "Favorites", path: "/favorites", active: location.pathname === "/favorites" },
+    // { icon: BookOpen, label: "Courses", path: "/courses", active: location.pathname === "/courses" },
+    // { icon: Users, label: "Community", path: "/community", active: location.pathname === "/community" },
   ]
 
   const mealTypes = [
