@@ -55,36 +55,36 @@ const Home = () => {
   return (
     <>
       {/* Search Bar */}
-      <div className="mb-8">
-        <div className="relative max-w-md">
+      <div className="mb-6 lg:mb-8">
+        <div className="relative w-full lg:max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
             type="search"
             placeholder="Search for recipes..."
-            className="pl-10 pr-4 py-6 text-base"
+            className="pl-10 pr-4 py-5 lg:py-6 text-base w-full"
           />
         </div>
       </div>
 
       {/* Main Heading */}
-      <h1 className="text-4xl font-bold mb-8 text-gray-900">
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-gray-900">
         {getMealTypeTitle()}
       </h1>
 
       {/* Dietary Type Filter Buttons */}
-      <div className="mb-8">
+      <div className="mb-6 lg:mb-8">
         <h3 className="text-sm font-semibold text-gray-600 mb-3">Dietary Preference</h3>
-        <div className="flex gap-3 flex-wrap">
+        <div className="flex gap-2 lg:gap-3 flex-wrap">
           {dietaryTypes.map((type) => (
             <Button
               key={type.value}
               variant={selectedDietaryType === type.value ? "default" : "outline"}
               onClick={() => setSelectedDietaryType(type.value)}
-              className={
+              className={`text-sm lg:text-base ${
                 selectedDietaryType === type.value
                   ? "bg-green-500 hover:bg-green-600 text-white border-green-500"
                   : "bg-white hover:bg-gray-50 text-gray-700 border-gray-300"
-              }
+              }`}
             >
               {type.label}
             </Button>
@@ -95,7 +95,7 @@ const Home = () => {
       {/* Recipe Cards Grid */}
       {recipes.length > 0 ? (
         <>
-          <div className="grid grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
             {recipes.map((recipe) => (
               <div key={recipe.id} onClick={() => handleRecipeClick(recipe.id)} className="cursor-pointer">
                 <RecipeCard recipe={recipe} />
@@ -105,11 +105,11 @@ const Home = () => {
 
           {/* Featured Recipe Section */}
           {featuredRecipe && (
-            <div className="grid grid-cols-3 gap-6">
-              <div className="col-span-2 cursor-pointer" onClick={() => handleRecipeClick(featuredRecipe.id)}>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+              <div className="lg:col-span-2 cursor-pointer" onClick={() => handleRecipeClick(featuredRecipe.id)}>
                 <RecipeCard recipe={featuredRecipe} featured={true} />
               </div>
-              <div className="space-y-6">
+              <div className="space-y-4 lg:space-y-6">
                 {sideRecipes.map((recipe) => (
                   <div key={recipe.id} onClick={() => handleRecipeClick(recipe.id)} className="cursor-pointer">
                     <RecipeCard recipe={recipe} buttonText="Get The Offer" />
@@ -121,7 +121,7 @@ const Home = () => {
         </>
       ) : (
         <div className="text-center py-12">
-          <p className="text-xl text-gray-500">No recipes found for the selected filters.</p>
+          <p className="text-lg lg:text-xl text-gray-500">No recipes found for the selected filters.</p>
         </div>
       )}
     </>
