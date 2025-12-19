@@ -1,8 +1,11 @@
 import { Card, CardContent, CardFooter } from "./ui/card"
 import { Button } from "./ui/button"
 import { Star, Clock } from "lucide-react"
+import { useLanguage } from '../context/LanguageContext'
 
 const RecipeCard = ({ recipe, featured = false, buttonText = null }) => {
+  const { language } = useLanguage()
+  
   const getButtonText = () => {
     if (buttonText) return buttonText
     return featured ? "Get The Offer" : "View Recipe"
@@ -14,6 +17,8 @@ const RecipeCard = ({ recipe, featured = false, buttonText = null }) => {
     }
     return "bg-gray-900 hover:bg-gray-800 text-white"
   }
+
+  const description = language === 'en' ? recipe.description : recipe.description_od
 
   return (
     <Card className={`overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-shadow ${featured ? "" : ""}`}>
@@ -50,7 +55,7 @@ const RecipeCard = ({ recipe, featured = false, buttonText = null }) => {
         </div>
         {featured && (
           <div className="space-y-3 mb-4">
-            <p className="text-sm text-gray-600 leading-relaxed">{recipe.description}</p>
+            <p className="text-sm text-gray-600 leading-relaxed">{description}</p>
             <div className="flex gap-6 text-sm pt-2 border-t border-gray-100">
               <div>
                 <span className="text-gray-500">Serving:</span>{" "}

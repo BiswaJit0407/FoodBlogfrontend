@@ -3,10 +3,12 @@ import { ArrowLeft, Star, Clock, Users, ChefHat } from 'lucide-react'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { recipesData } from '../data/recipes'
+import { useLanguage } from '../context/LanguageContext'
 
 const RecipeDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { language } = useLanguage()
   const recipe = recipesData.find(r => r.id === parseInt(id))
 
   if (!recipe) {
@@ -17,6 +19,8 @@ const RecipeDetails = () => {
       </div>
     )
   }
+
+  const description = language === 'en' ? recipe.description : recipe.description_od
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -69,7 +73,7 @@ const RecipeDetails = () => {
           </div>
         </div>
 
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">{recipe.description}</p>
+        <p className="text-lg text-gray-700 leading-relaxed mb-6">{description}</p>
       </div>
 
       {/* Recipe Info Cards */}
