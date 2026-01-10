@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Layout from './components/Layout'
+import LandingLayout from './components/LandingLayout'
+import Landing from './pages/Landing'
 import Home from './pages/Home'
 import RecipeDetails from './pages/RecipeDetails'
 import Pantry from './pages/Pantry'
@@ -16,14 +18,20 @@ function App() {
     <LanguageProvider>
       <BrowserRouter>
         <Routes>
+          {/* Landing Page - No Sidebar */}
+          <Route path="/" element={<LandingLayout />}>
+            <Route index element={<Landing />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
+
+          {/* Recipe Pages - With Sidebar */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route path="recipes" element={<Home />} />
             <Route path="recipe/:id" element={<RecipeDetails />} />
             <Route path="pantry" element={<Pantry />} />
             <Route path="tips" element={<ProTips />} />
             <Route path="tutorials" element={<Tutorials />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
             <Route path="favorites" element={<Favorites />} />
           </Route>
         </Routes>

@@ -1,43 +1,30 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
-import LanguageToggle from './LanguageToggle'
+import Header from './Header'
 import Footer from './Footer'
-import { Menu } from 'lucide-react'
-import { Button } from './ui/button'
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Header */}
+      <Header onMenuClick={() => setIsSidebarOpen(true)} />
       
-      <main className="flex-1 lg:ml-64 w-full flex flex-col">
-        {/* Mobile Header */}
-        <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsSidebarOpen(true)}
-            className="p-2"
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
-          <LanguageToggle />
-        </div>
-
-        {/* Desktop Header */}
-        <div className="hidden lg:flex justify-end p-4">
-          <LanguageToggle />
-        </div>
-
-        <div className="flex-1 p-4 lg:p-8">
-          <Outlet />
-        </div>
-
-        <Footer />
-      </main>
+      {/* Main Content Area */}
+      <div className="flex flex-1">
+        {/* Sidebar */}
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+        
+        {/* Main Content */}
+        <main className="flex-1 lg:ml-64 w-full flex flex-col">
+          <div className="flex-1 p-4 lg:p-8">
+            <Outlet />
+          </div>
+          <Footer />
+        </main>
+      </div>
     </div>
   )
 }
