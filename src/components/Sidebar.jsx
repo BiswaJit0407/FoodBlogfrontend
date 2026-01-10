@@ -1,5 +1,5 @@
 import { Button } from "./ui/button"
-import { Home, Heart, BookOpen, ChefHat, Droplets, Soup, Cookie, Leaf, X } from "lucide-react"
+import { Home, Heart, BookOpen, ChefHat, Droplets, Soup, Cookie, Leaf, X, Video } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -33,6 +33,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     { icon: Cookie, label: "Pitha & Meetha", path: "/?category=pitha", active: location.search === "?category=pitha" },
     { icon: BookOpen, label: "The Pantry", path: "/pantry", active: location.pathname === "/pantry" },
     { icon: BookOpen, label: "Pro-Tips", path: "/tips", active: location.pathname === "/tips" },
+    { icon: Video, label: "Tutorials", path: "/tutorials", active: location.pathname === "/tutorials" },
   ]
 
   return (
