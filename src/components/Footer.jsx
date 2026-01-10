@@ -32,7 +32,7 @@ const Footer = () => {
                 <ChefHat className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Odia Heritage Kitchen</h3>
+                <h3 className="font-bold text-lg">Chiran's Kitchen</h3>
                 <p className="text-xs text-gray-400">Decade-Old Desi Cuisine</p>
               </div>
             </div>
@@ -135,7 +135,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-gray-800 pt-6 text-center">
           <p className="text-sm text-gray-400">
-            © 2025 Odia Heritage Kitchen. Made with <Heart className="inline h-4 w-4 text-red-500" /> for preserving Odia culinary heritage.
+            © 2025 Chiran's Kitchen. Made with <Heart className="inline h-4 w-4 text-red-500" /> for preserving Odia culinary heritage.
           </p>
           <p className="text-xs text-gray-500 mt-2 italic">
             "ଖାଦ୍ୟ ହିଁ ଔଷଧ, ରୋଷେଇ ହିଁ ପ୍ରେମ" - Food is medicine, cooking is love

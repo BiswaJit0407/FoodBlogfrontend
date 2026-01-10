@@ -58,7 +58,7 @@ const Home = () => {
     if (category === 'pitha') return 'Pitha & Meetha'
     if (dietary === 'veg') return 'Niramisa (Vegetarian Delicacies)'
     if (dietary === 'non-veg') return 'Amisa (Non-Vegetarian Delicacies)'
-    return 'Odia Heritage Kitchen'
+    return 'Chiran\'s Kitchen'
   }
 
   const getPageSubtitle = () => {

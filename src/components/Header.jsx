@@ -41,7 +41,7 @@ const Header = ({ onMenuClick }) => {
               </div>
               <div className="hidden sm:block">
                 <h1 className="font-bold text-lg text-gray-900 leading-tight">
-                  Odia Heritage Kitchen
+                  Chiran's Kitchen
                 </h1>
                 <p className="text-xs text-gray-500">Decade-Old Desi Cuisine</p>
               </div>

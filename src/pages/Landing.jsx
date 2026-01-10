@@ -65,7 +65,7 @@ const Landing = () => {
             <ChefHat className="h-12 w-12 text-orange-600" />
           </div>
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Odia Heritage Kitchen
+            Chiran's Kitchen
           </h1>
           <p className="text-xl lg:text-2xl mb-4 text-orange-100">
             Decade-Old Desi Cuisine
@@ -275,7 +275,7 @@ const Landing = () => {
                     <Mail className="h-6 w-6 text-orange-500 mt-1" />
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                      <p className="text-gray-600">heritage@odiakitchen.com</p>
+                      <p className="text-gray-600">hello@chiranskitchen.com</p>
                     </div>
                   </div>
                 </CardContent>
