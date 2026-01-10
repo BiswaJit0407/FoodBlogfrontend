@@ -11,24 +11,30 @@ const Home = () => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
-  const mealType = searchParams.get('meal')
+  const category = searchParams.get('category')
+  const dietary = searchParams.get('dietary')
 
   const dietaryTypes = [
     { value: 'all', label: 'All' },
-    { value: 'veg', label: 'Veg' },
-    { value: 'non-veg', label: 'Non-Veg' }
+    { value: 'veg', label: 'Niramisa (Veg)' },
+    { value: 'non-veg', label: 'Amisa (Non-Veg)' }
   ]
 
-  // Filter recipes based on meal type and dietary type
+  // Filter recipes based on category and dietary type
   const getFilteredRecipes = () => {
     let filtered = recipesData
 
-    // Filter by meal type if selected from sidebar
-    if (mealType) {
-      filtered = filtered.filter(recipe => recipe.mealType === mealType)
+    // Filter by category if selected from sidebar
+    if (category) {
+      filtered = filtered.filter(recipe => recipe.odiaCategory === category)
     }
 
-    // Filter by dietary type
+    // Filter by dietary type from sidebar
+    if (dietary) {
+      filtered = filtered.filter(recipe => recipe.dietaryType === dietary)
+    }
+
+    // Filter by dietary type from page buttons
     if (selectedDietaryType !== 'all') {
       filtered = filtered.filter(recipe => recipe.dietaryType === selectedDietaryType)
     }
@@ -45,11 +51,19 @@ const Home = () => {
     navigate(`/recipe/${recipeId}`)
   }
 
-  const getMealTypeTitle = () => {
-    if (mealType) {
-      return `${mealType.charAt(0).toUpperCase() + mealType.slice(1)} Recipes`
-    }
-    return 'Learn, Cook, & Eat your food'
+  const getPageTitle = () => {
+    if (category === 'sukhila') return 'Sukhila (Dry Dishes)'
+    if (category === 'pani') return 'Pani (Liquid Dishes)'
+    if (category === 'side') return 'Side Items - Bhaja & Khatta'
+    if (category === 'pitha') return 'Pitha & Meetha'
+    if (dietary === 'veg') return 'Niramisa (Vegetarian Delicacies)'
+    if (dietary === 'non-veg') return 'Amisa (Non-Vegetarian Delicacies)'
+    return 'Odia Heritage Kitchen'
+  }
+
+  const getPageSubtitle = () => {
+    if (category || dietary) return 'Decade-Old Traditional Recipes'
+    return 'Preserving the taste of Odisha, one recipe at a time'
   }
 
   return (
@@ -60,20 +74,25 @@ const Home = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
             type="search"
-            placeholder="Search for recipes..."
+            placeholder="Search by ingredient or dish name..."
             className="pl-10 pr-4 py-5 lg:py-6 text-base w-full"
           />
         </div>
       </div>
 
       {/* Main Heading */}
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 lg:mb-8 text-gray-900">
-        {getMealTypeTitle()}
-      </h1>
+      <div className="mb-6 lg:mb-8">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-gray-900">
+          {getPageTitle()}
+        </h1>
+        <p className="text-sm lg:text-base text-gray-600 italic">
+          {getPageSubtitle()}
+        </p>
+      </div>
 
       {/* Dietary Type Filter Buttons */}
       <div className="mb-6 lg:mb-8">
-        <h3 className="text-sm font-semibold text-gray-600 mb-3">Dietary Preference</h3>
+        <h3 className="text-sm font-semibold text-gray-600 mb-3">Filter by Type</h3>
         <div className="flex gap-2 lg:gap-3 flex-wrap">
           {dietaryTypes.map((type) => (
             <Button
@@ -82,7 +101,7 @@ const Home = () => {
               onClick={() => setSelectedDietaryType(type.value)}
               className={`text-sm lg:text-base ${
                 selectedDietaryType === type.value
-                  ? "bg-green-500 hover:bg-green-600 text-white border-green-500"
+                  ? "bg-orange-500 hover:bg-orange-600 text-white border-orange-500"
                   : "bg-white hover:bg-gray-50 text-gray-700 border-gray-300"
               }`}
             >
@@ -112,7 +131,7 @@ const Home = () => {
               <div className="space-y-4 lg:space-y-6">
                 {sideRecipes.map((recipe) => (
                   <div key={recipe.id} onClick={() => handleRecipeClick(recipe.id)} className="cursor-pointer">
-                    <RecipeCard recipe={recipe} buttonText="Get The Offer" />
+                    <RecipeCard recipe={recipe} buttonText="View Recipe" />
                   </div>
                 ))}
               </div>
@@ -122,6 +141,7 @@ const Home = () => {
       ) : (
         <div className="text-center py-12">
           <p className="text-lg lg:text-xl text-gray-500">No recipes found for the selected filters.</p>
+          <p className="text-sm text-gray-400 mt-2">Try selecting a different category or dietary preference.</p>
         </div>
       )}
     </>

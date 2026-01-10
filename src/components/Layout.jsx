@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import LanguageToggle from './LanguageToggle'
-import { Menu, X } from 'lucide-react'
+import Footer from './Footer'
+import { Menu } from 'lucide-react'
 import { Button } from './ui/button'
 
 const Layout = () => {
@@ -12,7 +13,7 @@ const Layout = () => {
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       
-      <main className="flex-1 lg:ml-64 w-full">
+      <main className="flex-1 lg:ml-64 w-full flex flex-col">
         {/* Mobile Header */}
         <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
           <Button
@@ -31,9 +32,11 @@ const Layout = () => {
           <LanguageToggle />
         </div>
 
-        <div className="p-4 lg:p-8">
+        <div className="flex-1 p-4 lg:p-8">
           <Outlet />
         </div>
+
+        <Footer />
       </main>
     </div>
   )

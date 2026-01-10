@@ -1,6 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { Button } from "./ui/button"
-import { ChefHat, Heart, BookOpen, Users, Coffee, Utensils, Moon, Cookie, X } from "lucide-react"
+import { Home, Heart, BookOpen, ChefHat, Droplets, Soup, Cookie, Leaf, X } from "lucide-react"
 import { useNavigate, useLocation } from "react-router-dom"
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -13,17 +12,27 @@ const Sidebar = ({ isOpen, onClose }) => {
   }
 
   const navItems = [
-    { icon: ChefHat, label: "All Recipes", path: "/", active: location.pathname === "/" && !location.search },
-    // { icon: Heart, label: "Favorites", path: "/favorites", active: location.pathname === "/favorites" },
-    // { icon: BookOpen, label: "Courses", path: "/courses", active: location.pathname === "/courses" },
-    // { icon: Users, label: "Community", path: "/community", active: location.pathname === "/community" },
+    { icon: Home, label: "Home", path: "/", active: location.pathname === "/" && !location.search },
+    { icon: Heart, label: "Favorites", path: "/favorites", active: location.pathname === "/favorites" },
+    { icon: BookOpen, label: "About Us", path: "/about", active: location.pathname === "/about" },
+    { icon: BookOpen, label: "Contact", path: "/contact", active: location.pathname === "/contact" },
   ]
 
-  const mealTypes = [
-    { icon: Coffee, label: "Breakfast", path: "/?meal=breakfast", active: location.search === "?meal=breakfast" },
-    { icon: Utensils, label: "Lunch", path: "/?meal=lunch", active: location.search === "?meal=lunch" },
-    { icon: Moon, label: "Dinner", path: "/?meal=dinner", active: location.search === "?meal=dinner" },
-    { icon: Cookie, label: "Snack", path: "/?meal=snack", active: location.search === "?meal=snack" },
+  const odiaThali = [
+    { icon: ChefHat, label: "Sukhila (Dry)", path: "/?category=sukhila", active: location.search === "?category=sukhila" },
+    { icon: Droplets, label: "Pani (Liquids)", path: "/?category=pani", active: location.search === "?category=pani" },
+    { icon: Soup, label: "Side Items", path: "/?category=side", active: location.search === "?category=side" },
+  ]
+
+  const mainCourse = [
+    { icon: Leaf, label: "Niramisa (Veg)", path: "/?dietary=veg", active: location.search === "?dietary=veg" },
+    { icon: ChefHat, label: "Amisa (Non-Veg)", path: "/?dietary=non-veg", active: location.search === "?dietary=non-veg" },
+  ]
+
+  const special = [
+    { icon: Cookie, label: "Pitha & Meetha", path: "/?category=pitha", active: location.search === "?category=pitha" },
+    { icon: BookOpen, label: "The Pantry", path: "/pantry", active: location.pathname === "/pantry" },
+    { icon: BookOpen, label: "Pro-Tips", path: "/tips", active: location.pathname === "/tips" },
   ]
 
   return (
@@ -52,15 +61,16 @@ const Sidebar = ({ isOpen, onClose }) => {
           <X className="h-5 w-5" />
         </Button>
 
+        {/* Brand Section */}
         <div className="flex flex-col items-center mb-8">
-          <Avatar className="w-20 h-20 mb-4">
-            <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Theresa" />
-            <AvatarFallback>TW</AvatarFallback>
-          </Avatar>
-          <h3 className="font-semibold text-lg">Theresa Webb</h3>
-          <p className="text-sm text-gray-500">Master Chef</p>
+          <div className="w-20 h-20 mb-4 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg">
+            <ChefHat className="h-10 w-10 text-white" />
+          </div>
+          <h3 className="font-bold text-lg text-center">Odia Heritage Kitchen</h3>
+          <p className="text-xs text-gray-500 text-center mt-1">Decade-Old Desi Cuisine</p>
         </div>
 
+        {/* Main Navigation */}
         <nav className="space-y-2 mb-6">
           {navItems.map((item) => {
             const Icon = item.icon
@@ -71,7 +81,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 onClick={() => handleNavigation(item.path)}
                 className={`w-full justify-start ${
                   item.active
-                    ? "bg-yellow-400 hover:bg-yellow-500 text-black"
+                    ? "bg-orange-500 hover:bg-orange-600 text-white"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
@@ -82,23 +92,74 @@ const Sidebar = ({ isOpen, onClose }) => {
           })}
         </nav>
 
-        <div className="border-t border-gray-200 pt-4">
-          <h4 className="text-xs font-semibold text-gray-500 uppercase mb-3 px-3">Meal Types</h4>
+        {/* The Odia Thali */}
+        <div className="border-t border-gray-200 pt-4 mb-6">
+          <h4 className="text-xs font-semibold text-gray-500 uppercase mb-3 px-3">The Odia Thali</h4>
           <nav className="space-y-2">
-            {mealTypes.map((item) => {
+            {odiaThali.map((item) => {
               const Icon = item.icon
               return (
                 <Button
                   key={item.label}
                   variant={item.active ? "default" : "ghost"}
                   onClick={() => handleNavigation(item.path)}
-                  className={`w-full justify-start ${
+                  className={`w-full justify-start text-sm ${
                     item.active
-                      ? "bg-yellow-400 hover:bg-yellow-500 text-black"
+                      ? "bg-orange-500 hover:bg-orange-600 text-white"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
-                  <Icon className="mr-3 h-5 w-5" />
+                  <Icon className="mr-3 h-4 w-4" />
+                  {item.label}
+                </Button>
+              )
+            })}
+          </nav>
+        </div>
+
+        {/* Main Course */}
+        <div className="border-t border-gray-200 pt-4 mb-6">
+          <h4 className="text-xs font-semibold text-gray-500 uppercase mb-3 px-3">Main Course</h4>
+          <nav className="space-y-2">
+            {mainCourse.map((item) => {
+              const Icon = item.icon
+              return (
+                <Button
+                  key={item.label}
+                  variant={item.active ? "default" : "ghost"}
+                  onClick={() => handleNavigation(item.path)}
+                  className={`w-full justify-start text-sm ${
+                    item.active
+                      ? "bg-orange-500 hover:bg-orange-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <Icon className="mr-3 h-4 w-4" />
+                  {item.label}
+                </Button>
+              )
+            })}
+          </nav>
+        </div>
+
+        {/* Special Sections */}
+        <div className="border-t border-gray-200 pt-4">
+          <h4 className="text-xs font-semibold text-gray-500 uppercase mb-3 px-3">Special</h4>
+          <nav className="space-y-2">
+            {special.map((item) => {
+              const Icon = item.icon
+              return (
+                <Button
+                  key={item.label}
+                  variant={item.active ? "default" : "ghost"}
+                  onClick={() => handleNavigation(item.path)}
+                  className={`w-full justify-start text-sm ${
+                    item.active
+                      ? "bg-orange-500 hover:bg-orange-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <Icon className="mr-3 h-4 w-4" />
                   {item.label}
                 </Button>
               )
@@ -111,4 +172,3 @@ const Sidebar = ({ isOpen, onClose }) => {
 }
 
 export default Sidebar
-
